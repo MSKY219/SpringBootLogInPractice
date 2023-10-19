@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+
+<body>
+    <h2>list.html</h2>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>memberEmail</th>
+            <th>memberPassword</th>
+            <th>memberName</th>
+            <th>상세조회</th>
+            <th>삭제</th>
+        </tr>
+        <tr th:each="member: ${memberList}">
+            <!-- th:each는 thymeleaf에서 제공하는 foreach와 같은 문법이다.
+                 여기서는 model에 담겨있는 memberList를 가져다 쓸 수 있게 해준다.
+            -->
+            <td th:text="${member.id}"></td>
+            <!-- th:text="${변수명.필드명}"
+                 필드명은 memberDTO에서 지정함.
+            -->
+            <td th:text="${member.memberEmail}"></td>
+            <td th:text="${member.memberPassword}"></td>
+            <td th:text="${member.memberName}"></td>
+            <td>
+                <!-- Query String / member?id=1
+                    rest api : 주소로 어떤 자원인지 확인하자로 사용된다.
+                    /member/1
+                -->
+<!--                문제가 있는 코드-->
+<!--                <a th:href="@{|/member/$member.id}|">조회</a>-->
+<!--                &lt;!&ndash; Thymeleaf에서 지원하는 경로 문법 &ndash;&gt;-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <a th:href="@{|/member/delete/$member.id|}">삭제</a>-->
+<!--            </td>-->
+
+            <a th:href="@{|/member/${member.id}|}">조회</a>
+            <!-- Thymeleaf에서 지원하는 경로 문법 -->
+            </td>
+            <td>
+                <a th:href="@{|/member/delete/${member.id}|}">삭제</a>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

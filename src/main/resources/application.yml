@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+# database 연동 설정
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    각자 PC에 만들어놓은 Database이름을 써야 합니다.
+    url: jdbc:mysql://localhost:3306/ms_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    #    mysql에 생성한 사용자 계정 정보를 써야 합니다.
+    username: user_ms
+    password: 1234
+  thymeleaf:
+    cache: false
+
+  # spring data jpa 설정
+  jpa:
+    # database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    # 현재 내가 사용하는 버전은 8버전이기에 5버전에서 사용되는 코드를 사용하면
+    # [org.hibernate.dialect.MySQL5InnoDBDialect] as strategy [org.hibernate.dialect.Dialect]
+    # 에러가 발생한다.
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
